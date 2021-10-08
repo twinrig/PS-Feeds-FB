@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDataSourceStorage">
+    <option name="dataSources">
+      <list>
+        <State>
+          <option name="id" value="0fdbf3e8-5ac7-42f6-8fa7-6eb35e351bc7" />
+          <option name="name" value="Run_Process" />
+          <option name="urls">
+            <array>
+              <option value="file://$PROJECT_DIR$/Run_Process.sql" />
+            </array>
+          </option>
+          <option name="scriptOptions">
+            <map>
+              <entry key="QualifyWithSchema" value="ALWAYS" />
+            </map>
+          </option>
+        </State>
+      </list>
+    </option>
+  </component>
+</project>

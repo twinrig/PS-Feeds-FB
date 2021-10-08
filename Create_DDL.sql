@@ -115,7 +115,7 @@ create table if not exists fb.cfs_incoming
 );
 
 alter table fb.cfs_incoming owner to chammer;
-drop index  fb.ix_cfs_incoming_vehicle_id;
+create index ix_cfs_incoming_mod on fb.cfs_incoming (modification_complete);
 create index ix_cfs_incoming_vehicle_id_modification_complete on fb.cfs_incoming (vehicle_id,modification_complete);
 create index ix_cfs_incoming_Dealer_id_modification_complete on fb.cfs_incoming (dealer_id,modification_complete);
 create index IX_cfs_incoming_staging_vehicleid_md5 on fb.cfs_incoming_staging (vehicle_id,md5_check);

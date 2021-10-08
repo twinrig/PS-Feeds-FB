@@ -1,7 +1,7 @@
 --  Prep Object for run
 delete from fb.incoming_files;
 delete from fb.xml_incoming;
-
+delete from fb.cfs_incoming_staging;
 -- Get list of files to load
 insert into fb.incoming_files (filename)
     Select pg_ls_dir('/mnt/fb/_v2/exports/cfsfacebook');
@@ -190,7 +190,7 @@ insert into fb.cfs_incoming (filename, fb_page_id, vehicle_id, dealer_id, dealer
            s.addr1, s.city, s.region, s.postal_code, s.country, s.latitude, s.longitude, s.date_first_on_lot, s.vin, s.car_history_link, s.state_of_vehicle,
            s.body_style, s.year, s.make, s.model, s.fuel_type, s.transmission, s.drivetrain, s.exterior_color, s.interior_color, s.title, s.description, s.url,
            s.price, s.carfax_dealership_id, s.msrp, s.mileage, s.images, s.md5_check
-    from fb.cfs_incoming_staging    as s
+    from fb.cfs_incoming_staging as s
     left outer join fb.cfs_incoming as i on i.vehicle_id = s.vehicle_id
     where i.vehicle_id is null;
     
