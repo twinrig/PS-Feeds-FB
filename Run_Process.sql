@@ -182,11 +182,11 @@ update fb.cfs_incoming as ci
       and cis.md5_check  <> ci.md5_check;
 
 -- Insert new records from staging to existing
-insert into fb.cfs_incoming (mod filename, fb_page_id, vehicle_id, dealer_id, dealer_name, dealer_phone, dealer_communication_channel,
+insert into fb.cfs_incoming (modification_complete, filename, fb_page_id, vehicle_id, dealer_id, dealer_name, dealer_phone, dealer_communication_channel,
                              dealer_privacy_policy_url, addr1, city, region, postal_code, country, latitude, longitude, date_first_on_lot,
                              vin, car_history_link, state_of_vehicle, body_style, year, make, model, fuel_type, transmission, drivetrain,
                              exterior_color, interior_color, title, description, url, price, carfax_dealership_id,msrp, mileage, images, md5_check)
-    select s.filename, s.fb_page_id, s.vehicle_id, s.dealer_id, s.dealer_name, s.dealer_phone, s.dealer_communication_channel, s.dealer_privacy_policy_url,
+    select true, s.filename, s.fb_page_id, s.vehicle_id, s.dealer_id, s.dealer_name, s.dealer_phone, s.dealer_communication_channel, s.dealer_privacy_policy_url,
            s.addr1, s.city, s.region, s.postal_code, s.country, s.latitude, s.longitude, s.date_first_on_lot, s.vin, s.car_history_link, s.state_of_vehicle,
            s.body_style, s.year, s.make, s.model, s.fuel_type, s.transmission, s.drivetrain, s.exterior_color, s.interior_color, s.title, s.description, s.url,
            s.price, s.carfax_dealership_id, s.msrp, s.mileage, s.images, s.md5_check
