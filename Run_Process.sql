@@ -182,7 +182,7 @@ update fb.cfs_incoming as ci
       and cis.md5_check  <> ci.md5_check;
 
 -- Insert new records from staging to existing
-insert into fb.cfs_incoming (filename, fb_page_id, vehicle_id, dealer_id, dealer_name, dealer_phone, dealer_communication_channel,
+insert into fb.cfs_incoming (mod filename, fb_page_id, vehicle_id, dealer_id, dealer_name, dealer_phone, dealer_communication_channel,
                              dealer_privacy_policy_url, addr1, city, region, postal_code, country, latitude, longitude, date_first_on_lot,
                              vin, car_history_link, state_of_vehicle, body_style, year, make, model, fuel_type, transmission, drivetrain,
                              exterior_color, interior_color, title, description, url, price, carfax_dealership_id,msrp, mileage, images, md5_check)
