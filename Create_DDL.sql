@@ -1,17 +1,20 @@
+--create database feeds;
+
+--drop extension postgres_fdw cascade ;
 -- auto-generated definition
 create schema audittracking;
+create schema if not exists fb;
+grant all on schema fb to psapi;
+
 create extension postgres_fdw;
+create extension "uuid-ossp";
+
 create server audittracking foreign data wrapper postgres_fdw options (host 'localhost', port '5432', dbname 'chassis_audittracking');
-create user mapping for chammer server audittracking options (user 'chammer', password 'Tmax9899');
+create user mapping for chammer server audittracking options (user 'psapi', password 'p1Cb5v*Q681B');
 IMPORT FOREIGN SCHEMA public FROM SERVER  audittracking into audittracking;
 
 
 
-
-
-
-create schema if not exists fb;
-grant all on schema fb to psapi;
 
 ---------------------------------------------------------------------------------------------------------
 drop table if exists fb.incoming_files;
@@ -118,7 +121,7 @@ alter table fb.cfs_incoming owner to chammer;
 create index ix_cfs_incoming_mod on fb.cfs_incoming (modification_complete);
 create index ix_cfs_incoming_vehicle_id_modification_complete on fb.cfs_incoming (vehicle_id,modification_complete);
 create index ix_cfs_incoming_Dealer_id_modification_complete on fb.cfs_incoming (dealer_id,modification_complete);
-create index IX_cfs_incoming_staging_vehicleid_md5 on fb.cfs_incoming_staging (vehicle_id,md5_check);
+create index IX_cfs_incoming_vehicleid_md5 on fb.cfs_incoming_staging (vehicle_id,md5_check);
 
 grant delete, insert, references, select, trigger, truncate, update on fb.cfs_incoming to psapi;
 
