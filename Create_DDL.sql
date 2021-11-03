@@ -8,31 +8,44 @@ grant all on all tables in schema public to psapi;
 create schema if  not exists core;
 create schema if not exists audittracking;
 create schema if not exists fb;
+create schema if not exists etl;
 
 create extension postgres_fdw;
 create extension "uuid-ossp";
 
 create server audittracking foreign data wrapper postgres_fdw options (host 'localhost', port '5432', dbname 'chassis_audittracking');
 create server core foreign data wrapper postgres_fdw options (host 'localhost', port '5432', dbname 'chassis_core');
+create server etl foreign data wrapper postgres_fdw options (host 'localhost', port '5432', dbname 'etl');
+
+
 --Dev
 create user mapping for psapi server audittracking options (user 'psapi', password '1jDg6t227fmz');
 create user mapping for psapi server core options (user 'psapi', password '1jDg6t227fmz');
+create user mapping for psapi server etl options (user 'psapi', password '1jDg6t227fmz');
 create user mapping for chammer server audittracking options  (user 'chammer', password 'Tmax9899');
 create user mapping for chammer server core options  (user 'chammer', password 'Tmax9899');
+create user mapping for chammer server etl options  (user 'chammer', password 'Tmax9899');
+
 --UAT
 create user mapping for psapi server audittracking options (user 'psapi', password 'hm10*XsCaO*8');
 create user mapping for psapi server core options (user 'psapi', password 'hm10*XsCaO*8');
+create user mapping for psapi server etl options (user 'psapi', password 'hm10*XsCaO*8');
 create user mapping for chammer server audittracking options  (user 'chammer', password 'Tmax9899');
 create user mapping for chammer server core options  (user 'chammer', password 'Tmax9899');
+create user mapping for chammer server etl options  (user 'chammer', password 'Tmax9899');
+
 --PROD
 create user mapping for psapi server audittracking options (user 'psapi', password 'p1Cb5v*Q681B');
 create user mapping for psapi server core options (user 'psapi', password 'p1Cb5v*Q681B');
+create user mapping for psapi server etl options (user 'psapi', password 'p1Cb5v*Q681B');
 create user mapping for chammer server audittracking options  (user 'chammer', password 'rCp0^4kv2nof');
 create user mapping for chammer server core options  (user 'chammer', password 'rCp0^4kv2nof');
+create user mapping for chammer server etl options  (user 'chammer', password 'rCp0^4kv2nof');
 
 
 IMPORT FOREIGN SCHEMA public FROM SERVER  audittracking into audittracking;
 IMPORT FOREIGN SCHEMA public FROM SERVER  core into core;
+IMPORT FOREIGN SCHEMA chassis FROM SERVER etl into etl;
 
 
 

@@ -1,3 +1,8 @@
-Select * from audittracking.audit order by date_created desc
+/*
+delete from audittracking.audit where object_assembly = 'Chassis.Entities.Feed.CfsIncoming'
+Delete from fb.cfs_incoming;;
+*/
 
-Delete from fb.cfs_incoming
+
+
+

@@ -110,6 +110,11 @@ from fb.xml_incoming,
                          image_19 text PATH 'image[19]/url',
                          image_20 text PATH 'image[20]/url');
 
+-- Update Dealer_Id column from globaluserid to account_number
+Update fb.cfs_incoming_staging as cis set Dealer_id = x.dealer_id
+    from etl.dealer_xref as x
+    where  cis.dealer_id = x.globaluser_id;
+
 -- Compare Staging to existing & insert into audit
 insert into audittracking.audit (audit_id, object_id, object_assembly, referer, user_id, change_type,date_created,  "Approved", change_patch)
     select uuid_generate_v4(), o.id,'Chassis.Entities.Feed.CfsIncoming','',null,'Modified', now()  at time zone 'UTC', false,
@@ -144,11 +149,12 @@ insert into audittracking.audit (audit_id, object_id, object_assembly, referer, 
         ,',')|| '}' as text[]))
 from fb.cfs_incoming_staging as n
 join fb.cfs_incoming         as o       on n.vehicle_id = o.vehicle_id
-join core.account            as acc     on n.dealer_id::varchar = acc.account_number
-join core.account_feature    as af      on af.account_id = acc.account_id
-join core.feature            as f       on af.feature_id = f.feature_id
-where f.name = 'FBMP Manual Entry'
-  and n.md5_check  <> o.md5_check;
+--join core.account            as acc     on n.dealer_id::varchar = acc.account_number
+--join core.account_feature    as af      on af.account_id = acc.account_id
+--join core.feature            as f       on af.feature_id = f.feature_id
+where n.md5_check  <> o.md5_check
+--and f.name = 'FBMP Manual Entry'
+;
 
 -- Update staging to existing
 update fb.cfs_incoming as ci
