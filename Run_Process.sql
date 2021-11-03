@@ -143,8 +143,12 @@ insert into audittracking.audit (audit_id, object_id, object_assembly, referer, 
                         case when o.images::text <> n.images::text then 'images, ' || to_json( o.images::varchar) || ',' else ''  end
         ,',')|| '}' as text[]))
 from fb.cfs_incoming_staging as n
-join fb.cfs_incoming         as o   on n.vehicle_id = o.vehicle_id
-where n.md5_check  <> o.md5_check;
+join fb.cfs_incoming         as o       on n.vehicle_id = o.vehicle_id
+join core.account            as acc     on n.dealer_id::varchar = acc.account_number
+join core.account_feature    as af      on af.account_id = acc.account_id
+join core.feature            as f       on af.feature_id = f.feature_id
+where f.name = 'FBMP Manual Entry'
+  and n.md5_check  <> o.md5_check;
 
 -- Update staging to existing
 update fb.cfs_incoming as ci
@@ -193,5 +197,3 @@ insert into fb.cfs_incoming (modification_complete, filename, fb_page_id, vehicl
     from fb.cfs_incoming_staging as s
     left outer join fb.cfs_incoming as i on i.vehicle_id = s.vehicle_id
     where i.vehicle_id is null;
-    
-

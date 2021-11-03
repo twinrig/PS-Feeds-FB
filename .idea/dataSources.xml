@@ -22,5 +22,12 @@
       <jdbc-url>jdbc:postgresql://cruz-sf1-uat-db-1.carsforsale.local:5432/postgres</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="Chassis Dev - PSAPI" uuid="7ef00f52-ff32-4594-8032-10295fbf5a91">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://cruz-sf1-dev-db-1.carsforsale.local:5432/feeds</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
